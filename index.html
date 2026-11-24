@@ -101,13 +101,13 @@ footer{text-align:center;color:#b5bfd4;font-size:.82rem;padding:0 15px 25px}
 <defs>
  <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#cce99a"/><stop offset=".35" stop-color="#6aa85d"/><stop offset=".72" stop-color="#28734b"/><stop offset="1" stop-color="#164631"/></linearGradient>
  <linearGradient id="leafFold" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#d9efa9"/><stop offset=".48" stop-color="#6eaa60"/><stop offset="1" stop-color="#245d40"/></linearGradient>
- <linearGradient id="base" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f3dba7"/><stop offset=".42" stop-color="#c08d50"/><stop offset="1" stop-color="#70482d"/></linearGradient>
+ <linearGradient id="baseGrad" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f3dba7"/><stop offset=".42" stop-color="#c08d50"/><stop offset="1" stop-color="#70482d"/></linearGradient>
  <linearGradient id="pinkPetal" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff0dc"/><stop offset=".45" stop-color="#f28eae"/><stop offset="1" stop-color="#bf4c7b"/></linearGradient>
  <linearGradient id="yellowPetal" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff4b4"/><stop offset=".5" stop-color="#ffc13c"/><stop offset="1" stop-color="#dc7419"/></linearGradient>
  <linearGradient id="whitePetal" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#d9d9c8"/></linearGradient>
 </defs>
 <ellipse cx="260" cy="353" rx="178" ry="30" fill="#030a18" opacity=".48"/>
-<g id="base"></g><g id="backLeaves"></g><g id="frontLeaves"></g><g id="topRim"></g><g id="flowers"></g><g id="incense"></g><g id="candle"></g>
+<g id="raftBase"></g><g id="backLeaves"></g><g id="frontLeaves"></g><g id="topRim"></g><g id="flowers"></g><g id="incense"></g><g id="candle"></g>
 </svg></section>
 <section class="panel wizard">
 <div class="top"><span id="stepName">படி 1 · மலர்கள்</span><span id="stepCount">1 / 4</span></div><div class="bar"><span id="progress"></span></div>
@@ -126,14 +126,14 @@ footer{text-align:center;color:#b5bfd4;font-size:.82rem;padding:0 15px 25px}
 const state={flower:"lotus",shape:"layered",candle:"pink",incense:"3"};let step=0;const $=id=>document.getElementById(id),NS="http://www.w3.org/2000/svg";
 function el(tag,attrs,parent){let n=document.createElementNS(NS,tag);Object.entries(attrs).forEach(([k,v])=>n.setAttribute(k,v));parent.append(n);return n}
 function render(){
- const base=$("base"),back=$("backLeaves"),front=$("frontLeaves"),rim=$("topRim"),flowers=$("flowers"),incense=$("incense"),candle=$("candle");
+ const base=$("raftBase"),back=$("backLeaves"),front=$("frontLeaves"),rim=$("topRim"),flowers=$("flowers"),incense=$("incense"),candle=$("candle");
  [base,back,front,rim,flowers,incense,candle].forEach(g=>g.replaceChildren());
  const compact=state.shape==="simple",bloom=state.shape==="rosette";
  const rx=compact?128:145, ry=compact?35:42;
  // A low, round banana-trunk raft with a visible thick side and shallow green top.
- el("path",{d:`M${260-rx} 260 Q260 218 ${260+rx} 260 L${260+rx-10} 315 Q260 365 ${260-rx+10} 315Z`,fill:"url(#base)",stroke:"#f5dfb4","stroke-width":4},base);
- el("ellipse",{cx:260,cy:260,rx,ry,fill:"#d7b77f",stroke:"#fff0ca","stroke-width":5},base);
- el("ellipse",{cx:260,cy:259,rx:rx-13,ry:ry-8,fill:"#286b48",stroke:"#9dbf73","stroke-width":4},base);
+ el("path",{d:`M${260-rx} 260 Q260 218 ${260+rx} 260 L${260+rx-10} 315 Q260 365 ${260-rx+10} 315Z`,fill:"url(#baseGrad)",stroke:"#f5dfb4","stroke-width":4},base);
+ el("ellipse",{cx:260,cy:260,rx,ry,fill:"url(#leaf)",stroke:"#d7efaa","stroke-width":5},base);
+ el("ellipse",{cx:260,cy:259,rx:rx-5,ry:ry-4,fill:"url(#leafFold)",stroke:"#9dbf73","stroke-width":3},base);
  // Dense folded banana-leaf petals: a back ring and an overlapping front ring.
  const outerN=compact?18:bloom?28:24, outerLen=compact?72:bloom?91:84;
  function leafRing(group,n,radX,radY,len,frontLayer){
@@ -151,6 +151,8 @@ function render(){
  // Back row first, then front row overlaps it like the reference krathong.
  leafRing(back,outerN,rx-5,ry-4,outerLen,false);
  leafRing(front,outerN,rx-17,ry-1,outerLen*.82,true);
+ // Fill the centre of the krathong with a continuous green banana-leaf pad.
+ el("ellipse",{cx:260,cy:260,rx:rx-25,ry:ry-11,fill:"url(#leafFold)",stroke:"#b8d98b","stroke-width":2.5},front);
  // Small folded collar around the upper edge of the raft.
  const collarN=bloom?14:12;
  for(let i=0;i<collarN;i++){
