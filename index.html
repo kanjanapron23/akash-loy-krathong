@@ -8,12 +8,21 @@
 header{text-align:center;padding:25px 15px 12px}.eyebrow{color:#f2d18e;font-size:.78rem;letter-spacing:.12em}h1{color:#ffe6ad;font-size:clamp(1.5rem,5vw,2.25rem);margin:8px 0}.intro{color:#c8d1e2;line-height:1.65;max-width:600px;margin:auto}
 main{width:min(980px,calc(100% - 24px));margin:16px auto 35px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .panel{border:1px solid #ffe1aa35;background:#ffffff0b;border-radius:22px;box-shadow:0 16px 45px #050b1d66;overflow:hidden}
-.preview{min-height:460px;position:relative;display:flex;align-items:center;justify-content:center;padding:18px;background:linear-gradient(#24375a,#101c37)}
+.preview{min-height:560px;position:relative;display:flex;align-items:center;justify-content:center;padding:18px;background:linear-gradient(#24375a,#101c37)}
 .moon{position:absolute;right:25px;top:23px;width:54px;height:54px;border-radius:50%;background:#fff0c7;box-shadow:0 0 35px #ffe9b177}.water{position:absolute;bottom:0;left:0;right:0;height:32%;background:repeating-linear-gradient(176deg,transparent 0 16px,#9eb9e02b 17px 19px,transparent 20px 34px)}
 .caption{position:absolute;top:16px;left:18px;color:#dbe2f0;font-size:.82rem;z-index:2}
 #krathong{width:min(100%,470px);height:auto;max-height:430px;z-index:1;filter:drop-shadow(0 18px 15px #02081799);transition:transform .45s}
-#krathong.float{animation:floataway 5s ease forwards}@keyframes floataway{to{transform:translateY(140px) scale(.58);opacity:0}}
-.wizard{padding:21px;min-height:460px;display:flex;flex-direction:column}.top{display:flex;justify-content:space-between;color:#f3d18d;font-size:.84rem;margin-bottom:10px}.bar{height:5px;background:#ffffff20;border-radius:9px;margin-bottom:20px;overflow:hidden}.bar span{display:block;height:100%;width:25%;background:linear-gradient(90deg,#f6d58f,#ec9bb2);transition:width .25s}
+#krathong.float{animation:floataway 6s cubic-bezier(.2,.65,.25,1) forwards;transform-origin:50% 55%}
+@keyframes floataway{0%{transform:translateY(0) scale(1);opacity:1}100%{transform:translateY(-118px) scale(.66);opacity:1}}
+.preview.released .water{animation:waterDrift 6s cubic-bezier(.2,.65,.25,1) forwards;transform-origin:50% 55%}.preview.released::after{content:"";position:absolute;z-index:0;left:8%;right:8%;bottom:7%;height:34%;pointer-events:none;background:radial-gradient(ellipse at 50% 45%,transparent 0 23%,#b8d9ee30 23.5% 24.2%,transparent 24.8% 36%,#b8d9ee24 36.5% 37.2%,transparent 38%),repeating-linear-gradient(176deg,transparent 0 17px,#b9d5ed16 18px 20px,transparent 21px 38px);border-radius:50%;filter:blur(1px);transform-origin:50% 55%;animation:waterDrift 6s cubic-bezier(.2,.65,.25,1) forwards}
+@keyframes waterDrift{0%{opacity:.35;transform:translateY(0) scale(1)}18%{opacity:.9}100%{opacity:.72;transform:translateY(-118px) scale(.66)}}
+.sparkle{transform-box:fill-box;transform-origin:center;animation:twinkle 1.25s ease-in-out infinite alternate;filter:drop-shadow(0 0 4px #ffd77a)}
+@keyframes twinkle{0%{opacity:.35;transform:scale(.65) rotate(0deg)}100%{opacity:1;transform:scale(1.25) rotate(35deg)}}
+.flame-sway{transform-box:fill-box;transform-origin:50% 100%;animation:flameDance 1.05s ease-in-out infinite;filter:drop-shadow(0 0 5px #ffb84d)}
+@keyframes flameDance{0%,100%{transform:rotate(-5deg) scaleX(.98)}50%{transform:rotate(6deg) scaleX(1.03)}}
+.smoke-wisp{fill:none;stroke:#d5dce7;stroke-width:2.8;stroke-linecap:round;opacity:0;filter:drop-shadow(0 0 3px #cbd6e8);animation:smokeRise 2.8s ease-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes smokeRise{0%{opacity:0;transform:translate(0,7px) scale(.72)}18%{opacity:.62}65%{opacity:.38}100%{opacity:0;transform:translate(8px,-34px) scale(1.35)}}
+.wizard{padding:22px;min-height:560px;display:flex;flex-direction:column}.top{display:flex;justify-content:space-between;color:#f3d18d;font-size:.84rem;margin-bottom:10px}.bar{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:22px;height:auto;background:none;overflow:visible}.bar i{height:5px;border-radius:8px;background:#ffffff25}.bar i.on{background:linear-gradient(90deg,#f6d99b,#eaa8bb)}
 .step{display:none}.step.active{display:block;animation:enter .2s}@keyframes enter{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 h2{font-size:1.2rem;color:#ffe6b2;margin:0 0 8px}.hint{color:#c5cde0;font-size:.9rem;line-height:1.6;margin:0 0 16px}
 .options{display:grid;grid-template-columns:1fr 1fr;gap:9px}.opt{min-height:76px;text-align:left;padding:11px;border-radius:14px;border:1px solid #ffffff35;background:#ffffff0a;color:#fff4e1;font:inherit;cursor:pointer}.opt b{display:block;color:#fff0d1;font-size:.92rem;margin-bottom:3px}.opt small{display:block;color:#bdc8dd;font-size:.77rem;line-height:1.4}.opt.selected{border-color:#f3d18a;background:#f3d18a20;box-shadow:inset 0 0 0 1px #f3d18a55}
@@ -47,6 +56,50 @@ footer{text-align:center;color:#b5bfd4;font-size:.82rem;padding:0 15px 25px}
   <div class="cover-art">
    <div class="cover-stars"></div><div class="cover-moon"></div><div class="cover-water"></div>
    <svg viewBox="0 0 1100 500" role="img" aria-label="ஒரு வாத்தும் கழுகும் நிலவொளியில் கிருத்தங்கத்தைப் பார்க்கின்றன">
+    <!-- riverbank and temple on the same side as the friends -->
+    <path d="M0 315 Q115 285 235 310 Q330 330 430 310 L470 410 L0 410Z" fill="#294b3d"/>
+    <path d="M0 326 Q110 300 230 326 Q340 345 455 322" fill="none" stroke="#73936d" stroke-width="5" opacity=".8"/>
+    <!-- Thai temple on the same riverbank as the duck and eagle -->
+    <g stroke="#e8c98f" stroke-width="4" stroke-linejoin="round">
+     <path d="M48 314 L48 282 L118 255 L188 282 L188 314Z" fill="#b98a59"/>
+     <path d="M36 282 L118 232 L200 282 L184 282 L118 251 L52 282Z" fill="#8b6349"/>
+     <path d="M55 270 L118 239 L181 270" fill="none" stroke="#f3d79f" stroke-width="5"/>
+     <path d="M82 314 L82 286 Q118 267 154 286 L154 314Z" fill="#263653"/>
+     <path d="M108 314 L108 286 L128 286 L128 314Z" fill="#d8b477" stroke-width="3"/>
+     <path d="M118 232 L118 216 L111 225 L118 205 L125 225 L118 216" fill="#e8c98f" stroke-width="2"/>
+     <path d="M63 282 L63 275 M173 282 L173 275" stroke="#f5dfa9" stroke-width="3"/>
+    </g>
+    <g fill="#78956a" opacity=".9">
+     <path d="M20 314 Q27 286 38 273 Q38 295 30 314Z"/>
+     <path d="M205 314 Q214 287 225 279 Q223 301 214 314Z"/>
+    </g>
+    <!-- a few cozy riverside homes around the temple, on the same bank -->
+    <g stroke="#e8c98f" stroke-width="3.5" stroke-linejoin="round">
+     <g transform="translate(218 284) scale(.62)">
+      <path d="M0 45 L0 12 L42 -18 L84 12 L84 45Z" fill="#a97850"/>
+      <path d="M-8 13 L42 -27 L92 13 L79 13 L42 -8 L5 13Z" fill="#76543f"/>
+      <path d="M28 45 L28 22 L56 22 L56 45Z" fill="#263653"/>
+      <path d="M40 -27 L42 -39 L44 -27" fill="none" stroke="#f0d59d" stroke-width="3"/>
+     </g>
+     <g transform="translate(365 292) scale(.52)">
+      <path d="M0 45 L0 12 L42 -18 L84 12 L84 45Z" fill="#b98559"/>
+      <path d="M-8 13 L42 -27 L92 13 L79 13 L42 -8 L5 13Z" fill="#805b42"/>
+      <path d="M28 45 L28 22 L56 22 L56 45Z" fill="#263653"/>
+      <path d="M40 -27 L42 -39 L44 -27" fill="none" stroke="#f0d59d" stroke-width="3"/>
+     </g>
+     <g transform="translate(12 302) scale(.42)">
+      <path d="M0 45 L0 12 L42 -18 L84 12 L84 45Z" fill="#a97850"/>
+      <path d="M-8 13 L42 -27 L92 13 L79 13 L42 -8 L5 13Z" fill="#76543f"/>
+      <path d="M28 45 L28 22 L56 22 L56 45Z" fill="#263653"/>
+     </g>
+    </g>
+    <!-- wooden landing in front of the bank -->
+    <g>
+     <path d="M55 392 L715 392 L750 454 L25 454Z" fill="#9b6945" stroke="#e2bd83" stroke-width="6"/>
+     <path d="M55 401 L711 401 M46 421 L728 421 M35 440 L739 440" stroke="#d4a574" stroke-width="4" opacity=".9"/>
+     <path d="M160 394 L132 451 M300 394 L285 451 M445 394 L450 451 M585 394 L610 451" stroke="#6f492f" stroke-width="3" opacity=".65"/>
+     <path d="M25 454 L750 454" stroke="#f0d5a4" stroke-width="5"/>
+    </g>
     <!-- cute yellow duck -->
     <g transform="translate(265 305)">
      <ellipse cx="0" cy="105" rx="78" ry="17" fill="#07132c" opacity=".35"/>
@@ -69,19 +122,256 @@ footer{text-align:center;color:#b5bfd4;font-size:.82rem;padding:0 15px 25px}
      <path d="M-34 88 Q-4 70 0 91 Q-20 106 -34 88 M34 88 Q4 70 0 91 Q20 106 34 88" fill="#f4e6d1"/>
      <path d="M-18 112 L-25 129 M18 112 L25 129" stroke="#e6ad4c" stroke-width="8" stroke-linecap="round"/>
     </g>
-    <!-- krathong on the river -->
-    <g transform="translate(820 330)">
-     <ellipse cx="0" cy="95" rx="150" ry="18" fill="#07132c" opacity=".35"/>
-     <path d="M-145 4 Q0 70 145 4 L120 65 Q0 112 -120 65Z" fill="#b77b50" stroke="#f2d39b" stroke-width="7"/>
-     <path d="M-145 4 Q0 -43 145 4 Q0 58 -145 4Z" fill="#34784d" stroke="#f4dca5" stroke-width="7"/>
-     <g fill="#4f9a5e" stroke="#d0e69a" stroke-width="4">
-      <path d="M-112 4 Q-145 -56 -100 -83 Q-75 -47 -82 7Z"/><path d="M-72 -4 Q-91 -77 -42 -105 Q-20 -53 -43 0Z"/><path d="M-24 -12 Q-35 -91 0 -124 Q31 -87 23 -12Z"/><path d="M27 -8 Q42 -84 86 -102 Q97 -55 54 1Z"/><path d="M77 3 Q111 -64 138 -55 Q144 -13 104 16Z"/>
+    <!-- Full banana-leaf master-style krathong on the river -->
+    <g transform="translate(760 365) scale(.36)">
+     <defs>
+      <linearGradient id="coverLeaf" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d8efaa"/><stop offset=".38" stop-color="#79b66a"/><stop offset=".75" stop-color="#34794d"/><stop offset="1" stop-color="#1d563b"/></linearGradient>
+      <linearGradient id="coverBowl" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#e8c48b"/><stop offset=".5" stop-color="#b77b50"/><stop offset="1" stop-color="#80502f"/></linearGradient>
+      <linearGradient id="coverPink" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff0df"/><stop offset=".5" stop-color="#f18caf"/><stop offset="1" stop-color="#c65380"/></linearGradient>
+     </defs>
+     <ellipse cx="0" cy="118" rx="218" ry="23" fill="#07132c" opacity=".42"/>
+     <path d="M-190 20 Q0 92 190 20 L160 91 Q0 142 -160 91Z" fill="url(#coverBowl)" stroke="#f2d39b" stroke-width="8"/>
+     <ellipse cx="0" cy="20" rx="190" ry="54" fill="#34784d" stroke="#f4dca5" stroke-width="8"/>
+     <g class="cover-back-leaf">
+      <g transform="translate(0.0 -22.0) rotate(0.0)">
+       <path d="M0 17 C-27 0 -24.3 -53.8 -14.0 -80.6 Q-5 -109.8 0 -112 Q5 -109.8 14.0 -80.6 C24.3 -53.8 27 0 0 17Z" fill="url(#coverLeaf)" stroke="#d9edaa" stroke-width="3"/>
+       <path d="M0 13 Q-1 -47.0 0 -104.2" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(38.8 -20.6) rotate(15.0)">
+       <path d="M0 17 C-27 0 -24.3 -53.8 -14.0 -80.6 Q-5 -109.8 0 -112 Q5 -109.8 14.0 -80.6 C24.3 -53.8 27 0 0 17Z" fill="url(#coverLeaf)" stroke="#d9edaa" stroke-width="3"/>
+       <path d="M0 13 Q-1 -47.0 0 -104.2" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(75.0 -16.4) rotate(30.0)">
+       <path d="M0 17 C-27 0 -24.3 -53.8 -14.0 -80.6 Q-5 -109.8 0 -112 Q5 -109.8 14.0 -80.6 C24.3 -53.8 27 0 0 17Z" fill="url(#coverLeaf)" stroke="#d9edaa" stroke-width="3"/>
+       <path d="M0 13 Q-1 -47.0 0 -104.2" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(106.1 -9.7) rotate(45.0)">
+       <path d="M0 17 C-27 0 -24.3 -53.8 -14.0 -80.6 Q-5 -109.8 0 -112 Q5 -109.8 14.0 -80.6 C24.3 -53.8 27 0 0 17Z" fill="url(#coverLeaf)" stroke="#d9edaa" stroke-width="3"/>
+       <path d="M0 13 Q-1 -47.0 0 -104.2" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(129.9 -1.0) rotate(60.0)">
+       <path d="M0 17 C-27 0 -24.3 -53.8 -14.0 -80.6 Q-5 -109.8 0 -112 Q5 -109.8 14.0 -80.6 C24.3 -53.8 27 0 0 17Z" fill="url(#coverLeaf)" stroke="#d9edaa" stroke-width="3"/>
+       <path d="M0 13 Q-1 -47.0 0 -104.2" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(144.9 9.1) rotate(75.0)">
+       <path d="M0 17 C-27 0 -24.3 -53.8 -14.0 -80.6 Q-5 -109.8 0 -112 Q5 -109.8 14.0 -80.6 C24.3 -53.8 27 0 0 17Z" fill="url(#coverLeaf)" stroke="#d9edaa" stroke-width="3"/>
+       <path d="M0 13 Q-1 -47.0 0 -104.2" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(150.0 20.0) rotate(90.0)">
+       <path d="M0 17 C-27 0 -24.3 -53.8 -14.0 -80.6 Q-5 -109.8 0 -112 Q5 -109.8 14.0 -80.6 C24.3 -53.8 27 0 0 17Z" fill="url(#coverLeaf)" stroke="#d9edaa" stroke-width="3"/>
+       <path d="M0 13 Q-1 -47.0 0 -104.2" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(144.9 30.9) rotate(105.0)">
+       <path d="M0 17 C-27 0 -24.3 -53.8 -14.0 -80.6 Q-5 -109.8 0 -112 Q5 -109.8 14.0 -80.6 C24.3 -53.8 27 0 0 17Z" fill="url(#coverLeaf)" stroke="#d9edaa" stroke-width="3"/>
+       <path d="M0 13 Q-1 -47.0 0 -104.2" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(129.9 41.0) rotate(120.0)">
+       <path d="M0 17 C-27 0 -24.3 -53.8 -14.0 -80.6 Q-5 -109.8 0 -112 Q5 -109.8 14.0 -80.6 C24.3 -53.8 27 0 0 17Z" fill="url(#coverLeaf)" stroke="#d9edaa" stroke-width="3"/>
+       <path d="M0 13 Q-1 -47.0 0 -104.2" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(106.1 49.7) rotate(135.0)">
+       <path d="M0 17 C-27 0 -24.3 -53.8 -14.0 -80.6 Q-5 -109.8 0 -112 Q5 -109.8 14.0 -80.6 C24.3 -53.8 27 0 0 17Z" fill="url(#coverLeaf)" stroke="#d9edaa" stroke-width="3"/>
+       <path d="M0 13 Q-1 -47.0 0 -104.2" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(75.0 56.4) rotate(150.0)">
+       <path d="M0 17 C-27 0 -24.3 -53.8 -14.0 -80.6 Q-5 -109.8 0 -112 Q5 -109.8 14.0 -80.6 C24.3 -53.8 27 0 0 17Z" fill="url(#coverLeaf)" stroke="#d9edaa" stroke-width="3"/>
+       <path d="M0 13 Q-1 -47.0 0 -104.2" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(38.8 60.6) rotate(165.0)">
+       <path d="M0 17 C-27 0 -24.3 -53.8 -14.0 -80.6 Q-5 -109.8 0 -112 Q5 -109.8 14.0 -80.6 C24.3 -53.8 27 0 0 17Z" fill="url(#coverLeaf)" stroke="#d9edaa" stroke-width="3"/>
+       <path d="M0 13 Q-1 -47.0 0 -104.2" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(0.0 62.0) rotate(180.0)">
+       <path d="M0 17 C-27 0 -24.3 -53.8 -14.0 -80.6 Q-5 -109.8 0 -112 Q5 -109.8 14.0 -80.6 C24.3 -53.8 27 0 0 17Z" fill="url(#coverLeaf)" stroke="#d9edaa" stroke-width="3"/>
+       <path d="M0 13 Q-1 -47.0 0 -104.2" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(-38.8 60.6) rotate(195.0)">
+       <path d="M0 17 C-27 0 -24.3 -53.8 -14.0 -80.6 Q-5 -109.8 0 -112 Q5 -109.8 14.0 -80.6 C24.3 -53.8 27 0 0 17Z" fill="url(#coverLeaf)" stroke="#d9edaa" stroke-width="3"/>
+       <path d="M0 13 Q-1 -47.0 0 -104.2" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(-75.0 56.4) rotate(210.0)">
+       <path d="M0 17 C-27 0 -24.3 -53.8 -14.0 -80.6 Q-5 -109.8 0 -112 Q5 -109.8 14.0 -80.6 C24.3 -53.8 27 0 0 17Z" fill="url(#coverLeaf)" stroke="#d9edaa" stroke-width="3"/>
+       <path d="M0 13 Q-1 -47.0 0 -104.2" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(-106.1 49.7) rotate(225.0)">
+       <path d="M0 17 C-27 0 -24.3 -53.8 -14.0 -80.6 Q-5 -109.8 0 -112 Q5 -109.8 14.0 -80.6 C24.3 -53.8 27 0 0 17Z" fill="url(#coverLeaf)" stroke="#d9edaa" stroke-width="3"/>
+       <path d="M0 13 Q-1 -47.0 0 -104.2" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(-129.9 41.0) rotate(240.0)">
+       <path d="M0 17 C-27 0 -24.3 -53.8 -14.0 -80.6 Q-5 -109.8 0 -112 Q5 -109.8 14.0 -80.6 C24.3 -53.8 27 0 0 17Z" fill="url(#coverLeaf)" stroke="#d9edaa" stroke-width="3"/>
+       <path d="M0 13 Q-1 -47.0 0 -104.2" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(-144.9 30.9) rotate(255.0)">
+       <path d="M0 17 C-27 0 -24.3 -53.8 -14.0 -80.6 Q-5 -109.8 0 -112 Q5 -109.8 14.0 -80.6 C24.3 -53.8 27 0 0 17Z" fill="url(#coverLeaf)" stroke="#d9edaa" stroke-width="3"/>
+       <path d="M0 13 Q-1 -47.0 0 -104.2" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(-150.0 20.0) rotate(270.0)">
+       <path d="M0 17 C-27 0 -24.3 -53.8 -14.0 -80.6 Q-5 -109.8 0 -112 Q5 -109.8 14.0 -80.6 C24.3 -53.8 27 0 0 17Z" fill="url(#coverLeaf)" stroke="#d9edaa" stroke-width="3"/>
+       <path d="M0 13 Q-1 -47.0 0 -104.2" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(-144.9 9.1) rotate(285.0)">
+       <path d="M0 17 C-27 0 -24.3 -53.8 -14.0 -80.6 Q-5 -109.8 0 -112 Q5 -109.8 14.0 -80.6 C24.3 -53.8 27 0 0 17Z" fill="url(#coverLeaf)" stroke="#d9edaa" stroke-width="3"/>
+       <path d="M0 13 Q-1 -47.0 0 -104.2" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(-129.9 -1.0) rotate(300.0)">
+       <path d="M0 17 C-27 0 -24.3 -53.8 -14.0 -80.6 Q-5 -109.8 0 -112 Q5 -109.8 14.0 -80.6 C24.3 -53.8 27 0 0 17Z" fill="url(#coverLeaf)" stroke="#d9edaa" stroke-width="3"/>
+       <path d="M0 13 Q-1 -47.0 0 -104.2" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(-106.1 -9.7) rotate(315.0)">
+       <path d="M0 17 C-27 0 -24.3 -53.8 -14.0 -80.6 Q-5 -109.8 0 -112 Q5 -109.8 14.0 -80.6 C24.3 -53.8 27 0 0 17Z" fill="url(#coverLeaf)" stroke="#d9edaa" stroke-width="3"/>
+       <path d="M0 13 Q-1 -47.0 0 -104.2" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(-75.0 -16.4) rotate(330.0)">
+       <path d="M0 17 C-27 0 -24.3 -53.8 -14.0 -80.6 Q-5 -109.8 0 -112 Q5 -109.8 14.0 -80.6 C24.3 -53.8 27 0 0 17Z" fill="url(#coverLeaf)" stroke="#d9edaa" stroke-width="3"/>
+       <path d="M0 13 Q-1 -47.0 0 -104.2" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(-38.8 -20.6) rotate(345.0)">
+       <path d="M0 17 C-27 0 -24.3 -53.8 -14.0 -80.6 Q-5 -109.8 0 -112 Q5 -109.8 14.0 -80.6 C24.3 -53.8 27 0 0 17Z" fill="url(#coverLeaf)" stroke="#d9edaa" stroke-width="3"/>
+       <path d="M0 13 Q-1 -47.0 0 -104.2" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
      </g>
-     <g fill="#f18fb0" stroke="#ffe6d4" stroke-width="3">
-      <circle cx="-55" cy="-8" r="19"/><circle cx="0" cy="-26" r="23"/><circle cx="55" cy="-8" r="19"/>
+     <g class="cover-front-leaf">
+      <g transform="translate(0.0 -15.0) rotate(0.0)">
+       <path d="M0 17 C-23 0 -20.7 -42.2 -12.0 -63.4 Q-5 -86.2 0 -88 Q5 -86.2 12.0 -63.4 C20.7 -42.2 23 0 0 17Z" fill="url(#coverLeaf)" stroke="#cfe69c" stroke-width="3"/>
+       <path d="M0 13 Q-1 -37.0 0 -81.8" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(34.4 -13.8) rotate(15.0)">
+       <path d="M0 17 C-23 0 -20.7 -42.2 -12.0 -63.4 Q-5 -86.2 0 -88 Q5 -86.2 12.0 -63.4 C20.7 -42.2 23 0 0 17Z" fill="url(#coverLeaf)" stroke="#cfe69c" stroke-width="3"/>
+       <path d="M0 13 Q-1 -37.0 0 -81.8" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(66.5 -10.3) rotate(30.0)">
+       <path d="M0 17 C-23 0 -20.7 -42.2 -12.0 -63.4 Q-5 -86.2 0 -88 Q5 -86.2 12.0 -63.4 C20.7 -42.2 23 0 0 17Z" fill="url(#coverLeaf)" stroke="#cfe69c" stroke-width="3"/>
+       <path d="M0 13 Q-1 -37.0 0 -81.8" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(94.0 -4.7) rotate(45.0)">
+       <path d="M0 17 C-23 0 -20.7 -42.2 -12.0 -63.4 Q-5 -86.2 0 -88 Q5 -86.2 12.0 -63.4 C20.7 -42.2 23 0 0 17Z" fill="url(#coverLeaf)" stroke="#cfe69c" stroke-width="3"/>
+       <path d="M0 13 Q-1 -37.0 0 -81.8" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(115.2 2.5) rotate(60.0)">
+       <path d="M0 17 C-23 0 -20.7 -42.2 -12.0 -63.4 Q-5 -86.2 0 -88 Q5 -86.2 12.0 -63.4 C20.7 -42.2 23 0 0 17Z" fill="url(#coverLeaf)" stroke="#cfe69c" stroke-width="3"/>
+       <path d="M0 13 Q-1 -37.0 0 -81.8" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(128.5 10.9) rotate(75.0)">
+       <path d="M0 17 C-23 0 -20.7 -42.2 -12.0 -63.4 Q-5 -86.2 0 -88 Q5 -86.2 12.0 -63.4 C20.7 -42.2 23 0 0 17Z" fill="url(#coverLeaf)" stroke="#cfe69c" stroke-width="3"/>
+       <path d="M0 13 Q-1 -37.0 0 -81.8" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(133.0 20.0) rotate(90.0)">
+       <path d="M0 17 C-23 0 -20.7 -42.2 -12.0 -63.4 Q-5 -86.2 0 -88 Q5 -86.2 12.0 -63.4 C20.7 -42.2 23 0 0 17Z" fill="url(#coverLeaf)" stroke="#cfe69c" stroke-width="3"/>
+       <path d="M0 13 Q-1 -37.0 0 -81.8" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(128.5 29.1) rotate(105.0)">
+       <path d="M0 17 C-23 0 -20.7 -42.2 -12.0 -63.4 Q-5 -86.2 0 -88 Q5 -86.2 12.0 -63.4 C20.7 -42.2 23 0 0 17Z" fill="url(#coverLeaf)" stroke="#cfe69c" stroke-width="3"/>
+       <path d="M0 13 Q-1 -37.0 0 -81.8" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(115.2 37.5) rotate(120.0)">
+       <path d="M0 17 C-23 0 -20.7 -42.2 -12.0 -63.4 Q-5 -86.2 0 -88 Q5 -86.2 12.0 -63.4 C20.7 -42.2 23 0 0 17Z" fill="url(#coverLeaf)" stroke="#cfe69c" stroke-width="3"/>
+       <path d="M0 13 Q-1 -37.0 0 -81.8" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(94.0 44.7) rotate(135.0)">
+       <path d="M0 17 C-23 0 -20.7 -42.2 -12.0 -63.4 Q-5 -86.2 0 -88 Q5 -86.2 12.0 -63.4 C20.7 -42.2 23 0 0 17Z" fill="url(#coverLeaf)" stroke="#cfe69c" stroke-width="3"/>
+       <path d="M0 13 Q-1 -37.0 0 -81.8" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(66.5 50.3) rotate(150.0)">
+       <path d="M0 17 C-23 0 -20.7 -42.2 -12.0 -63.4 Q-5 -86.2 0 -88 Q5 -86.2 12.0 -63.4 C20.7 -42.2 23 0 0 17Z" fill="url(#coverLeaf)" stroke="#cfe69c" stroke-width="3"/>
+       <path d="M0 13 Q-1 -37.0 0 -81.8" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(34.4 53.8) rotate(165.0)">
+       <path d="M0 17 C-23 0 -20.7 -42.2 -12.0 -63.4 Q-5 -86.2 0 -88 Q5 -86.2 12.0 -63.4 C20.7 -42.2 23 0 0 17Z" fill="url(#coverLeaf)" stroke="#cfe69c" stroke-width="3"/>
+       <path d="M0 13 Q-1 -37.0 0 -81.8" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(0.0 55.0) rotate(180.0)">
+       <path d="M0 17 C-23 0 -20.7 -42.2 -12.0 -63.4 Q-5 -86.2 0 -88 Q5 -86.2 12.0 -63.4 C20.7 -42.2 23 0 0 17Z" fill="url(#coverLeaf)" stroke="#cfe69c" stroke-width="3"/>
+       <path d="M0 13 Q-1 -37.0 0 -81.8" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(-34.4 53.8) rotate(195.0)">
+       <path d="M0 17 C-23 0 -20.7 -42.2 -12.0 -63.4 Q-5 -86.2 0 -88 Q5 -86.2 12.0 -63.4 C20.7 -42.2 23 0 0 17Z" fill="url(#coverLeaf)" stroke="#cfe69c" stroke-width="3"/>
+       <path d="M0 13 Q-1 -37.0 0 -81.8" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(-66.5 50.3) rotate(210.0)">
+       <path d="M0 17 C-23 0 -20.7 -42.2 -12.0 -63.4 Q-5 -86.2 0 -88 Q5 -86.2 12.0 -63.4 C20.7 -42.2 23 0 0 17Z" fill="url(#coverLeaf)" stroke="#cfe69c" stroke-width="3"/>
+       <path d="M0 13 Q-1 -37.0 0 -81.8" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(-94.0 44.7) rotate(225.0)">
+       <path d="M0 17 C-23 0 -20.7 -42.2 -12.0 -63.4 Q-5 -86.2 0 -88 Q5 -86.2 12.0 -63.4 C20.7 -42.2 23 0 0 17Z" fill="url(#coverLeaf)" stroke="#cfe69c" stroke-width="3"/>
+       <path d="M0 13 Q-1 -37.0 0 -81.8" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(-115.2 37.5) rotate(240.0)">
+       <path d="M0 17 C-23 0 -20.7 -42.2 -12.0 -63.4 Q-5 -86.2 0 -88 Q5 -86.2 12.0 -63.4 C20.7 -42.2 23 0 0 17Z" fill="url(#coverLeaf)" stroke="#cfe69c" stroke-width="3"/>
+       <path d="M0 13 Q-1 -37.0 0 -81.8" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(-128.5 29.1) rotate(255.0)">
+       <path d="M0 17 C-23 0 -20.7 -42.2 -12.0 -63.4 Q-5 -86.2 0 -88 Q5 -86.2 12.0 -63.4 C20.7 -42.2 23 0 0 17Z" fill="url(#coverLeaf)" stroke="#cfe69c" stroke-width="3"/>
+       <path d="M0 13 Q-1 -37.0 0 -81.8" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(-133.0 20.0) rotate(270.0)">
+       <path d="M0 17 C-23 0 -20.7 -42.2 -12.0 -63.4 Q-5 -86.2 0 -88 Q5 -86.2 12.0 -63.4 C20.7 -42.2 23 0 0 17Z" fill="url(#coverLeaf)" stroke="#cfe69c" stroke-width="3"/>
+       <path d="M0 13 Q-1 -37.0 0 -81.8" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(-128.5 10.9) rotate(285.0)">
+       <path d="M0 17 C-23 0 -20.7 -42.2 -12.0 -63.4 Q-5 -86.2 0 -88 Q5 -86.2 12.0 -63.4 C20.7 -42.2 23 0 0 17Z" fill="url(#coverLeaf)" stroke="#cfe69c" stroke-width="3"/>
+       <path d="M0 13 Q-1 -37.0 0 -81.8" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(-115.2 2.5) rotate(300.0)">
+       <path d="M0 17 C-23 0 -20.7 -42.2 -12.0 -63.4 Q-5 -86.2 0 -88 Q5 -86.2 12.0 -63.4 C20.7 -42.2 23 0 0 17Z" fill="url(#coverLeaf)" stroke="#cfe69c" stroke-width="3"/>
+       <path d="M0 13 Q-1 -37.0 0 -81.8" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(-94.0 -4.7) rotate(315.0)">
+       <path d="M0 17 C-23 0 -20.7 -42.2 -12.0 -63.4 Q-5 -86.2 0 -88 Q5 -86.2 12.0 -63.4 C20.7 -42.2 23 0 0 17Z" fill="url(#coverLeaf)" stroke="#cfe69c" stroke-width="3"/>
+       <path d="M0 13 Q-1 -37.0 0 -81.8" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(-66.5 -10.3) rotate(330.0)">
+       <path d="M0 17 C-23 0 -20.7 -42.2 -12.0 -63.4 Q-5 -86.2 0 -88 Q5 -86.2 12.0 -63.4 C20.7 -42.2 23 0 0 17Z" fill="url(#coverLeaf)" stroke="#cfe69c" stroke-width="3"/>
+       <path d="M0 13 Q-1 -37.0 0 -81.8" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
+      <g transform="translate(-34.4 -13.8) rotate(345.0)">
+       <path d="M0 17 C-23 0 -20.7 -42.2 -12.0 -63.4 Q-5 -86.2 0 -88 Q5 -86.2 12.0 -63.4 C20.7 -42.2 23 0 0 17Z" fill="url(#coverLeaf)" stroke="#cfe69c" stroke-width="3"/>
+       <path d="M0 13 Q-1 -37.0 0 -81.8" fill="none" stroke="#e5f1bd" stroke-width="2.8"/>
+      </g>
      </g>
-     <path d="M-7 -32 L-7 -105 Q0 -122 7 -105 L7 -32Z" fill="#f1d28e"/><path d="M0 -130 Q-18 -109 0 -98 Q18 -109 0 -130Z" fill="#ffb34b"/>
-     <path d="M-26 -28 L-32 -108 M26 -28 L32 -108" stroke="#e9d39c" stroke-width="4" stroke-linecap="round"/>
+     <ellipse cx="0" cy="18" rx="105" ry="31" fill="#6ca85e" stroke="#c6df91" stroke-width="4"/>
+     <g fill="#6b9f58" stroke="#dcebab" stroke-width="3">
+      <path transform="rotate(-90)" d="M0 26 Q-18 5 -13 -22 Q-3 -18 0 -47 Q3 -18 13 -22 Q18 5 0 26Z"/>
+      <path transform="rotate(-60)" d="M0 26 Q-18 5 -13 -22 Q-3 -18 0 -47 Q3 -18 13 -22 Q18 5 0 26Z"/>
+      <path transform="rotate(-30)" d="M0 26 Q-18 5 -13 -22 Q-3 -18 0 -47 Q3 -18 13 -22 Q18 5 0 26Z"/>
+      <path transform="rotate(0)" d="M0 26 Q-18 5 -13 -22 Q-3 -18 0 -47 Q3 -18 13 -22 Q18 5 0 26Z"/>
+      <path transform="rotate(30)" d="M0 26 Q-18 5 -13 -22 Q-3 -18 0 -47 Q3 -18 13 -22 Q18 5 0 26Z"/>
+      <path transform="rotate(60)" d="M0 26 Q-18 5 -13 -22 Q-3 -18 0 -47 Q3 -18 13 -22 Q18 5 0 26Z"/>
+      <path transform="rotate(90)" d="M0 26 Q-18 5 -13 -22 Q-3 -18 0 -47 Q3 -18 13 -22 Q18 5 0 26Z"/>
+      <path transform="rotate(120)" d="M0 26 Q-18 5 -13 -22 Q-3 -18 0 -47 Q3 -18 13 -22 Q18 5 0 26Z"/>
+      <path transform="rotate(150)" d="M0 26 Q-18 5 -13 -22 Q-3 -18 0 -47 Q3 -18 13 -22 Q18 5 0 26Z"/>
+      <path transform="rotate(180)" d="M0 26 Q-18 5 -13 -22 Q-3 -18 0 -47 Q3 -18 13 -22 Q18 5 0 26Z"/>
+      <path transform="rotate(210)" d="M0 26 Q-18 5 -13 -22 Q-3 -18 0 -47 Q3 -18 13 -22 Q18 5 0 26Z"/>
+      <path transform="rotate(240)" d="M0 26 Q-18 5 -13 -22 Q-3 -18 0 -47 Q3 -18 13 -22 Q18 5 0 26Z"/>
+     </g>
+     <!-- flowers clustered around the candle -->
+     <g fill="url(#coverPink)" stroke="#ffe8d7" stroke-width="2.5">
+      <circle cx="-48" cy="13" r="17"/>
+      <circle cx="-22" cy="-4" r="18"/>
+      <circle cx="24" cy="-4" r="18"/>
+      <circle cx="49" cy="14" r="17"/>
+      <circle cx="-25" cy="35" r="15"/>
+      <circle cx="25" cy="35" r="15"/>
+      <circle cx="0" cy="22" r="18"/>
+     </g>
+     <g fill="#f7d16b">
+      <circle cx="-48" cy="13" r="5"/>
+      <circle cx="-22" cy="-4" r="5"/>
+      <circle cx="24" cy="-4" r="5"/>
+      <circle cx="49" cy="14" r="5"/>
+      <circle cx="-25" cy="35" r="5"/>
+      <circle cx="25" cy="35" r="5"/>
+      <circle cx="0" cy="22" r="5"/>
+     </g>
+     <!-- candle and visible flame -->
+     <path d="M-9 17 L-9 -57 Q0 -66 9 -57 L9 17Z" fill="#f1d28e" stroke="#fff0d0" stroke-width="2"/>
+     <path d="M0 -65 C-18 -87 -1 -105 1 -123 C19 -99 17 -78 0 -65Z" fill="#ffad36" stroke="#ffd27a" stroke-width="2"/>
+     <path d="M1 -72 C-6 -86 3 -97 5 -105 C13 -91 10 -79 1 -72Z" fill="#fff4bd"/>
+     <!-- incense sticks behind the candle -->
+     <g stroke-linecap="round">
+      <path d="M-35 8 L-39 -105 M35 8 L39 -105 M-55 12 L-61 -91" stroke="#4a382f" stroke-width="5"/>
+      <path d="M-39 -105 l0 -8 M39 -105 l0 -8 M-61 -91 l0 -8" stroke="#d64e37" stroke-width="4"/>
+      <path d="M-39 -118 C-52 -133 -30 -144 -40 -160 M39 -118 C26 -133 49 -145 38 -162 M-61 -104 C-73 -119 -52 -128 -62 -144" fill="none" stroke="#d5dce7" stroke-width="3" opacity=".7" stroke-linecap="round"/>
+     </g>
     </g>
    </svg>
   </div>
@@ -96,7 +386,7 @@ footer{text-align:center;color:#b5bfd4;font-size:.82rem;padding:0 15px 25px}
 
 <header><div class="eyebrow">ஒரே நதி, பல கரைகள் · ONE RIVER, MANY SHORES</div><h1>ஆகாஷுக்கான ஒரு சிறிய தீபத் திருவிழா</h1><p class="intro">ஒவ்வொரு தேர்வாகச் செய்து, உங்கள் சொந்த கிருத்தங்கத்தை உருவாக்குங்கள். ஒரே நிலவின் கீழ் நம் விருப்பங்களை மிதக்க விடுவோம்.</p></header>
 <main>
-<section class="panel preview"><div class="moon"></div><div class="water"></div><div class="caption">உங்கள் கிருத்தங்கம்</div>
+<section class="panel preview" id="preview"><div class="moon"></div><div class="water"></div><div class="caption">உங்கள் கிருத்தங்கம்</div>
 <svg id="krathong" viewBox="0 0 520 430" role="img" aria-label="வாழை இலைகளால் செய்யப்பட்ட பாரம்பரிய வட்ட கிருத்தோங்">
 <defs>
  <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#cce99a"/><stop offset=".35" stop-color="#6aa85d"/><stop offset=".72" stop-color="#28734b"/><stop offset="1" stop-color="#164631"/></linearGradient>
@@ -107,100 +397,85 @@ footer{text-align:center;color:#b5bfd4;font-size:.82rem;padding:0 15px 25px}
  <linearGradient id="whitePetal" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#d9d9c8"/></linearGradient>
 </defs>
 <ellipse cx="260" cy="353" rx="178" ry="30" fill="#030a18" opacity=".48"/>
-<g id="raftBase"></g><g id="backLeaves"></g><g id="frontLeaves"></g><g id="topRim"></g><g id="flowers"></g><g id="incense"></g><g id="candle"></g>
+<g id="raftBase"></g><g id="backLeaves"></g><g id="frontLeaves"></g><g id="topRim"></g><g id="trim"></g><g id="incense"></g><g id="flowers"></g><g id="candle"></g>
 </svg></section>
 <section class="panel wizard">
-<div class="top"><span id="stepName">படி 1 · மலர்கள்</span><span id="stepCount">1 / 4</span></div><div class="bar"><span id="progress"></span></div>
+<div class="top"><span id="stepName">படி 1 · மலர்கள்</span><span id="stepCount">1 / 7</span></div><div class="progress" id="progress"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
 <div class="step active" data-step="0"><h2>மலர்களைத் தேர்ந்தெடுக்கவும்</h2><p class="hint">உங்கள் கிருத்தங்கத்தை எந்த மலர்களால் அலங்கரிக்க விரும்புகிறீர்கள்?</p><div class="options" data-group="flower">
 <button class="opt selected" data-value="lotus"><b>தாமரை 🌸</b><small>இளஞ்சிவப்பு தாமரை</small></button><button class="opt" data-value="marigold"><b>சாமந்தி 🌼</b><small>தங்க நிற சாமந்தி</small></button><button class="opt" data-value="jasmine"><b>மல்லிகை 🤍</b><small>வெள்ளை மல்லிகை</small></button><button class="opt" data-value="mixed"><b>கலவை 💐</b><small>பலவகை மலர்கள்</small></button></div></div>
-<div class="step" data-step="1"><h2>கிருத்தங்கத்தின் வடிவத்தைத் தேர்ந்தெடுக்கவும்</h2><p class="hint">இலைகள் மடிக்கப்பட்டு அடுக்கப்படும் முறையைத் தேர்ந்தெடுக்கவும்.</p><div class="options" data-group="shape">
-<button class="opt selected" data-value="layered"><b>அடுக்குகள் 🌿</b><small>அடர்த்தியான பல அடுக்குகள்</small></button><button class="opt" data-value="rosette"><b>மலர் வட்டம் 🌺</b><small>வட்டமாக விரியும் இலைகள்</small></button><button class="opt" data-value="simple"><b>எளிய வடிவம் 🍃</b><small>குறைந்த இலை அலங்காரம்</small></button></div></div>
-<div class="step" data-step="2"><h2>தீபத்தையும் தூபத்தையும் தேர்ந்தெடுக்கவும்</h2><p class="hint">தீபத்தின் நிறத்தையும் தூபக்குச்சிகளின் எண்ணிக்கையையும் தேர்ந்தெடுக்கவும்.</p><div class="options" data-group="candle">
-<button class="opt selected" data-value="pink"><b>இளஞ்சிவப்பு 🕯️</b><small>மென்மையான இளஞ்சிவப்பு</small></button><button class="opt" data-value="gold"><b>தங்க நிறம் ✨</b><small>பாரம்பரிய தங்க ஒளி</small></button><button class="opt" data-value="ivory"><b>வெண்மை 🤍</b><small>மென்மையான வெள்ளை</small></button></div>
-<div class="options" data-group="incense" style="margin-top:9px"><button class="opt selected" data-value="3"><b>3 தூபக்குச்சிகள்</b><small>மூன்று குச்சிகள்</small></button><button class="opt" data-value="1"><b>1 தூபக்குச்சி</b><small>ஒரு குச்சி</small></button><button class="opt" data-value="5"><b>5 தூபக்குச்சிகள்</b><small>ஐந்து குச்சிகள்</small></button></div></div>
-<div class="step" data-step="3"><h2>உங்கள் விருப்பத்தை எழுதுங்கள்</h2><p class="hint">நதியுடன் பகிர விரும்பும் ஒரு நல்ல விருப்பத்தை எழுதுங்கள்.</p><textarea id="wish" maxlength="200" placeholder="உங்கள் விருப்பம்..."></textarea><div class="summary" id="summary"></div></div>
+<div class="step" data-step="1"><h2>வாழை இலை வடிவம்</h2><p class="hint">கிருத்தங்கத்தைச் சுற்றியுள்ள மடிக்கப்பட்ட இலைகளின் வடிவத்தைத் தேர்ந்தெடுக்கவும்.</p><div class="options" data-group="shape">
+<button class="opt selected" data-value="layered"><b>பாரம்பரிய அடுக்குகள் 🌿</b><small>அடர்த்தியான பல அடுக்குகள்</small></button><button class="opt" data-value="rosette"><b>மலர் வடிவம் 🌺</b><small>பெரிய மலரைப் போல விரியும் இலைகள்</small></button><button class="opt" data-value="simple"><b>எளிய வடிவம் 🍃</b><small>அழகான குறைந்த அடுக்குகள்</small></button></div></div>
+<div class="step" data-step="2"><h2>விளிம்பு அலங்காரம்</h2><p class="hint">கிருத்தங்கத்தின் விளிம்பில் சேர்க்க விரும்பும் அலங்காரத்தைத் தேர்ந்தெடுக்கவும்.</p><div class="options" data-group="trim">
+<button class="opt selected" data-value="gold"><b>தங்க விளிம்பு ✨</b><small>சிறிய தங்க மணிகள்</small></button><button class="opt" data-value="leaf"><b>பச்சை இலை 🌱</b><small>இயற்கையான இலை அலங்காரம்</small></button><button class="opt" data-value="flower"><b>மலர் விளிம்பு 🌼</b><small>சிறிய வெள்ளை மலர்கள்</small></button></div></div>
+<div class="step" data-step="3"><h2>தீபத்தின் நிறத்தைத் தேர்ந்தெடுக்கவும்</h2><p class="hint">நடுவில் ஒளிரும் தீபத்திற்கு ஒரு நிறத்தைத் தேர்ந்தெடுக்கவும்.</p><div class="options" data-group="candle">
+<button class="opt selected" data-value="pink"><b>இளஞ்சிவப்பு 🕯️</b><small>மென்மையான இளஞ்சிவப்பு</small></button><button class="opt" data-value="gold"><b>தங்க நிறம் ✨</b><small>வெப்பமான தங்க ஒளி</small></button><button class="opt" data-value="ivory"><b>வெண்மை 🤍</b><small>அமைதியான வெள்ளை</small></button></div></div>
+<div class="step" data-step="4"><h2>தூபக்குச்சிகளைத் தேர்ந்தெடுக்கவும்</h2><p class="hint">உங்கள் கிருத்தங்கத்தில் எத்தனை தூபக்குச்சிகள் இருக்க வேண்டும்?</p><div class="options" data-group="incense"><button class="opt selected" data-value="1"><b>1 குச்சி</b><small>ஒரு தூபக்குச்சி</small></button><button class="opt" data-value="3"><b>3 குச்சிகள்</b><small>மூன்று தூபக்குச்சிகள்</small></button><button class="opt" data-value="5"><b>5 குச்சிகள்</b><small>ஐந்து தூபக்குச்சிகள்</small></button></div></div>
+<div class="step" data-step="5"><h2>உங்கள் விருப்பத்தை எழுதுங்கள்</h2><p class="hint">நதியுடன் பகிர விரும்பும் ஒரு நல்ல விருப்பத்தை எழுதுங்கள்.</p><textarea id="wish" maxlength="220" placeholder="உங்கள் விருப்பம்..."></textarea><div class="summary" id="summary"></div></div>
+<div class="step" data-step="6"><h2>உங்கள் கிருத்தோங் தயாராகிவிட்டது! 🌕</h2><p class="hint">உங்கள் தேர்வுகளைப் பாருங்கள். பின்னர் உங்கள் விருப்பத்துடன் கிருத்தங்கத்தை ஆற்றில் விடுங்கள்.</p><div class="summary" id="finalSummary"></div><div class="summary" id="finalWish"></div></div>
 <div class="nav"><button class="back" id="back" disabled>← பின்னால்</button><button class="next" id="next">அடுத்து →</button></div>
 </section></main><footer>தாய்லாந்திலிருந்து, அன்புடன் · With warm wishes from Thailand 💛</footer>
 </div>
 <script>
-const state={flower:"lotus",shape:"layered",candle:"pink",incense:"3"};let step=0;const $=id=>document.getElementById(id),NS="http://www.w3.org/2000/svg";
-function el(tag,attrs,parent){let n=document.createElementNS(NS,tag);Object.entries(attrs).forEach(([k,v])=>n.setAttribute(k,v));parent.append(n);return n}
+const state={flower:"lotus",shape:"layered",trim:"gold",candle:"pink",incense:"1"};
+let step=0;
+const $=id=>document.getElementById(id),NS="http://www.w3.org/2000/svg";
+function el(tag,attrs,parent){const n=document.createElementNS(NS,tag);Object.entries(attrs).forEach(([k,v])=>n.setAttribute(k,v));parent.append(n);return n}
+function flower(p,x,y,type,size=1){
+ const count=type==="marigold"?12:type==="jasmine"?8:9,fill=type==="marigold"?"url(#yellowPetal)":type==="jasmine"?"url(#whitePetal)":"url(#pinkPetal)";
+ for(let i=0;i<count;i++){const g=el("g",{transform:`translate(${x} ${y}) rotate(${i*360/count}) scale(${size})`},p);el("path",{d:type==="jasmine"?"M0 0 C-8 -9 -8 -22 0 -31 C8 -22 8 -9 0 0Z":type==="marigold"?"M0 0 C-7 -8 -8 -20 0 -26 C8 -20 7 -8 0 0Z":"M0 0 C-12 -12 -11 -29 0 -37 C11 -29 12 -12 0 0Z",fill,stroke:"#fff0d4","stroke-width":1.2},g)}
+ el("circle",{cx:x,cy:y,r:5,fill:type==="marigold"?"#a85d1f":type==="jasmine"?"#e5d49b":"#f8d46e"},p);
+}
 function render(){
- const base=$("raftBase"),back=$("backLeaves"),front=$("frontLeaves"),rim=$("topRim"),flowers=$("flowers"),incense=$("incense"),candle=$("candle");
- [base,back,front,rim,flowers,incense,candle].forEach(g=>g.replaceChildren());
- const compact=state.shape==="simple",bloom=state.shape==="rosette";
- const rx=compact?128:145, ry=compact?35:42;
- // A low, round banana-trunk raft with a visible thick side and shallow green top.
+ const base=$("raftBase"),back=$("backLeaves"),front=$("frontLeaves"),rim=$("topRim"),trim=$("trim"),flowers=$("flowers"),incense=$("incense"),candle=$("candle");
+ [base,back,front,rim,trim,flowers,incense,candle].forEach(g=>g.replaceChildren());
+ const compact=state.shape==="simple",rosette=state.shape==="rosette";
+ const rx=compact?128:145,ry=compact?35:42,n=compact?18:rosette?28:24,len=compact?72:rosette?91:84;
  el("path",{d:`M${260-rx} 260 Q260 218 ${260+rx} 260 L${260+rx-10} 315 Q260 365 ${260-rx+10} 315Z`,fill:"url(#baseGrad)",stroke:"#f5dfb4","stroke-width":4},base);
  el("ellipse",{cx:260,cy:260,rx,ry,fill:"url(#leaf)",stroke:"#d7efaa","stroke-width":5},base);
  el("ellipse",{cx:260,cy:259,rx:rx-5,ry:ry-4,fill:"url(#leafFold)",stroke:"#9dbf73","stroke-width":3},base);
- // Dense folded banana-leaf petals: a back ring and an overlapping front ring.
- const outerN=compact?18:bloom?28:24, outerLen=compact?72:bloom?91:84;
- function leafRing(group,n,radX,radY,len,frontLayer){
-  for(let i=0;i<n;i++){
-   const a=-Math.PI/2+i*2*Math.PI/n;
-   const x=260+Math.cos(a)*radX, y=260+Math.sin(a)*radY;
-   const rot=(a*180/Math.PI)+90;
-   const g=el("g",{transform:`translate(${x} ${y}) rotate(${rot})`},group);
-   const w=frontLayer?22:25;
-   el("path",{d:`M0 19 C${-w-5} 8 ${-w-3} -${len*.35} ${-w*.58} -${len*.68} Q-5 -${len*.88} 0 -${len} Q5 -${len*.88} ${w*.58} -${len*.68} C${w+3} -${len*.35} ${w+5} 8 0 19Z`,fill:"url(#leaf)",stroke:"#cde59a","stroke-width":2},g);
-   el("path",{d:`M0 14 Q-2 -${len*.34} 0 -${len*.94}`,stroke:"#e2efb7","stroke-width":2.2,fill:"none"},g);
-   el("path",{d:`M0 8 Q${-w*.5} -${len*.2} ${-w*.55} -${len*.55}`,stroke:"#8fbd70","stroke-width":1,fill:"none",opacity:.8},g);
-  }
- }
- // Back row first, then front row overlaps it like the reference krathong.
- leafRing(back,outerN,rx-5,ry-4,outerLen,false);
- leafRing(front,outerN,rx-17,ry-1,outerLen*.82,true);
- // Fill the centre of the krathong with a continuous green banana-leaf pad.
+ function leafRing(group,count,radX,radY,leafLen,isFront){for(let i=0;i<count;i++){const a=-Math.PI/2+i*2*Math.PI/count,x=260+Math.cos(a)*radX,y=260+Math.sin(a)*radY,rot=a*180/Math.PI+90,g=el("g",{transform:`translate(${x} ${y}) rotate(${rot})`},group),w=isFront?22:25;el("path",{d:`M0 19 C${-w-5} 8 ${-w-3} -${leafLen*.35} ${-w*.58} -${leafLen*.68} Q-5 -${leafLen*.88} 0 -${leafLen} Q5 -${leafLen*.88} ${w*.58} -${leafLen*.68} C${w+3} -${leafLen*.35} ${w+5} 8 0 19Z`,fill:"url(#leaf)",stroke:"#cde59a","stroke-width":2},g);el("path",{d:`M0 14 Q-2 -${leafLen*.34} 0 -${leafLen*.94}`,stroke:"#e2efb7","stroke-width":2.2,fill:"none"},g);el("path",{d:`M0 8 Q${-w*.5} -${leafLen*.2} ${-w*.55} -${leafLen*.55}`,stroke:"#8fbd70","stroke-width":1,fill:"none",opacity:.8},g)}}
+ leafRing(back,n,rx-5,ry-4,len,false);leafRing(front,n,rx-17,ry-1,len*.82,true);
  el("ellipse",{cx:260,cy:260,rx:rx-25,ry:ry-11,fill:"url(#leafFold)",stroke:"#b8d98b","stroke-width":2.5},front);
- // Small folded collar around the upper edge of the raft.
- const collarN=bloom?14:12;
- for(let i=0;i<collarN;i++){
-  const a=-Math.PI/2+i*2*Math.PI/collarN,x=260+Math.cos(a)*92,y=259+Math.sin(a)*24;
-  const g=el("g",{transform:`translate(${x} ${y}) rotate(${i*360/collarN})`},rim);
-  el("path",{d:"M0 12 Q-13 -1 -10 -25 Q-2 -22 0 -39 Q2 -22 10 -25 Q13 -1 0 12Z",fill:"url(#leafFold)",stroke:"#d9e9aa","stroke-width":1.5},g);
+ const collarN=rosette?14:12;
+ for(let i=0;i<collarN;i++){const a=-Math.PI/2+i*2*Math.PI/collarN,x=260+Math.cos(a)*92,y=259+Math.sin(a)*24,g=el("g",{transform:`translate(${x} ${y}) rotate(${i*360/collarN})`},rim);el("path",{d:"M0 12 Q-13 -1 -10 -25 Q-2 -22 0 -39 Q2 -22 10 -25 Q13 -1 0 12Z",fill:"url(#leafFold)",stroke:"#d9e9aa","stroke-width":1.5},g)}
+ // Decorative edge options: gold beads, small leaves, or tiny white flowers.
+ for(let i=0;i<18;i++){const a=i*2*Math.PI/18,x=260+Math.cos(a)*(rx-17),y=259+Math.sin(a)*(ry+1);
+  if(state.trim==="gold")el("circle",{cx:x,cy:y,r:3.4,fill:"#f7d58b",stroke:"#fff0c8","stroke-width":1.1},trim);
+  else if(state.trim==="leaf"){const g=el("g",{transform:`translate(${x} ${y}) rotate(${i*20})`},trim);el("path",{d:"M0 0 Q-8 -7 0 -17 Q8 -7 0 0Z",fill:"#4f995e",stroke:"#d7eaa9","stroke-width":1.3},g)}
+  else flower(trim,x,y,"jasmine",.42);
  }
- // Flower species are drawn as clearly distinct clusters on the top surface.
  const centers=[[260,239],[222,251],[298,251],[239,273],[281,273],[260,278]];
- centers.forEach(([cx,cy],idx)=>{
-  const kind=state.flower==="mixed"?["lotus","marigold","jasmine"][idx%3]:state.flower;
-  const petals=kind==="marigold"?12:kind==="jasmine"?6:8;
-  const fill=kind==="marigold"?"url(#yellowPetal)":kind==="jasmine"?"url(#whitePetal)":"url(#pinkPetal)";
-  const center=kind==="marigold"?"#a85a19":kind==="jasmine"?"#e9dfb8":"#f7cf70";
-  for(let j=0;j<petals;j++){
-   const a=j*2*Math.PI/petals;
-   const g=el("g",{transform:`translate(${cx+Math.cos(a)*5} ${cy+Math.sin(a)*3}) rotate(${j*360/petals})`},flowers);
-   const d=kind==="marigold"?"M0 0 Q-5 -6 0 -13 Q5 -6 0 0Z":kind==="jasmine"?"M0 0 Q-8 -6 0 -15 Q8 -6 0 0Z":"M0 0 Q-8 -8 0 -18 Q8 -8 0 0Z";
-   el("path",{d,fill,stroke:kind==="jasmine"?"#fff":"#ffe8d2","stroke-width":1},g);
-  }
-  el("circle",{cx,cy,r:kind==="marigold"?4:3.5,fill:center},flowers);
- });
- // Three incense sticks by default; selected count updates the visible sticks.
+ centers.forEach(([x,y],i)=>{const kind=state.flower==="mixed"?["lotus","marigold","jasmine"][i%3]:state.flower;flower(flowers,x,y,kind,.72)});
+ // Incense sticks sit to the right of the candle so they remain visible.
+ // The incense layer is behind flowers and candle in the SVG stacking order.
+ const count=Number(state.incense);
+ for(let i=0;i<count;i++){
+  const x=316+(i-(count-1)/2)*20, top=count===1?150:156+(i%2)*8, tx=x+(i%2?2:-1);
+  el("path",{d:`M${x} 241 L${tx} ${top}`,stroke:"#4b382d","stroke-width":3.2,"stroke-linecap":"round"},incense);
+  el("path",{d:`M${tx} ${top} l0 -7`,stroke:"#d34c35","stroke-width":3.2,"stroke-linecap":"round"},incense);
+  el("path",{d:`M${tx} ${top-10} C${tx-8} ${top-20} ${tx+8} ${top-27} ${tx} ${top-38} C${tx-7} ${top-48} ${tx+8} ${top-54} ${tx+2} ${top-64}`,class:"smoke-wisp",style:`animation-delay:${i*.45}s`},incense);
+ }
+ // Candle body and flame: keep the position wrapper separate from the sway animation.
  const candleFill=state.candle==="pink"?"url(#pinkPetal)":state.candle==="gold"?"url(#yellowPetal)":"url(#whitePetal)";
  el("path",{d:"M251 214 Q260 207 269 214 L267 251 Q260 257 253 251Z",fill:candleFill,stroke:"#fff0d0","stroke-width":1.5},candle);
- el("path",{d:"M260 210 C247 198 262 186 261 173 C276 190 273 203 260 210Z",fill:"#ffb33f"},candle);
- el("path",{d:"M260 204 C256 196 263 191 263 188 C269 196 266 201 260 204Z",fill:"#fff6c3"},candle);
- const n=Number(state.incense);
- for(let i=0;i<n;i++){
-  const x=260+(i-(n-1)/2)*13, top= n===1?150:156+(i%2)*8;
-  el("path",{d:`M${x} 241 L${x+(i%2?2:-1)} ${top}`,stroke:"#e8c77f","stroke-width":3.2,"stroke-linecap":"round"},incense);
-  el("path",{d:`M${x+(i%2?2:-1)} ${top} l0 -7`,stroke:"#d34c35","stroke-width":3.2,"stroke-linecap":"round"},incense);
- }
+ const flamePosition=el("g",{transform:"translate(260 210)"},candle);
+ const flame=el("g",{class:"flame-sway"},flamePosition);
+ el("path",{d:"M0 0 C-13 -12 2 -24 1 -37 C16 -20 13 -7 0 0Z",fill:"#ffad36"},flame);
+ el("path",{d:"M0 -5 C-5 -12 2 -19 3 -24 C9 -15 7 -8 0 -5Z",fill:"#fff6c3"},flame);
+ const glint=el("g",{class:"sparkle"},flamePosition);
+ el("path",{d:"M-17 -27 L-14 -33 L-11 -27 L-14 -21Z",fill:"#ffe8a1"},glint);
+ el("circle",{cx:17,cy:-17,r:2.4,fill:"#fff0bd",class:"sparkle"},flamePosition);
  updateSummary();
 }
-const flowerNames={lotus:"தாமரை",marigold:"சாமந்தி",jasmine:"மல்லிகை",mixed:"கலவை மலர்கள்"},shapeNames={layered:"அடுக்குகள்",rosette:"மலர் வட்டம்",simple:"எளிய வடிவம்"},candleNames={pink:"இளஞ்சிவப்பு",gold:"தங்க நிறம்",ivory:"வெண்மை"};
-function updateSummary(){const txt=`மலர்கள்: ${flowerNames[state.flower]} · வடிவம்: ${shapeNames[state.shape]} · தீபம்: ${candleNames[state.candle]} · தூபம்: ${state.incense}`;$("summary").textContent=txt}
-document.querySelectorAll("[data-group]").forEach(g=>g.addEventListener("click",e=>{const b=e.target.closest("button[data-value]");if(!b)return;state[g.dataset.group]=b.dataset.value;g.querySelectorAll("button").forEach(x=>x.classList.toggle("selected",x===b));render()}));
-const labels=["படி 1 · மலர்கள்","படி 2 · வடிவம்","படி 3 · தீபம் & தூபம்","படி 4 · விருப்பம்"];
-function show(){document.querySelectorAll(".step").forEach((x,i)=>x.classList.toggle("active",i===step));$("stepName").textContent=labels[step];$("stepCount").textContent=`${step+1} / 4`;$("progress").style.width=`${(step+1)*25}%`;$("back").disabled=step===0;$("next").textContent=step===3?"கிருத்தங்கத்தை விடுங்கள் 🌙":"அடுத்து →"}
+const flowerNames={lotus:"தாமரை",marigold:"சாமந்தி",jasmine:"மல்லிகை",mixed:"கலவை மலர்கள்"},shapeNames={layered:"பாரம்பரிய அடுக்குகள்",rosette:"மலர் வடிவம்",simple:"எளிய வடிவம்"},trimNames={gold:"தங்க விளிம்பு",leaf:"பச்சை இலை விளிம்பு",flower:"மலர் விளிம்பு"},candleNames={pink:"இளஞ்சிவப்பு",gold:"தங்க நிறம்",ivory:"வெண்மை"};
+function summaryText(){return `மலர்கள்: ${flowerNames[state.flower]} · இலைகள்: ${shapeNames[state.shape]} · விளிம்பு: ${trimNames[state.trim]} · தீபம்: ${candleNames[state.candle]} · தூபம்: ${state.incense}`}
+function updateSummary(){if($("caption"))$("caption").textContent="உங்கள் கிருத்தங்கம்";if($("summary"))$("summary").textContent=summaryText();if($("finalSummary"))$("finalSummary").textContent=summaryText();if($("finalWish"))$("finalWish").textContent=$("wish").value.trim()||"உங்கள் நல்ல விருப்பங்கள் நிறைவேறட்டும். இந்த இரவு உங்களுக்கு அமைதியையும் மகிழ்ச்சியையும் கொண்டு வரட்டும். 💛"}
+document.querySelectorAll("[data-group]").forEach(g=>g.addEventListener("click",e=>{const b=e.target.closest("button[data-value]");if(!b)return;state[g.dataset.group]=b.dataset.value;g.querySelectorAll(".opt").forEach(x=>x.classList.toggle("selected",x===b));render()}));
+const labels=["படி 1 · மலர்கள்","படி 2 · இலை வடிவம்","படி 3 · விளிம்பு அலங்காரம்","படி 4 · தீபம்","படி 5 · தூபம்","படி 6 · விருப்பம்","படி 7 · தயார்"];
+function show(){document.querySelectorAll(".step").forEach((x,i)=>x.classList.toggle("active",i===step));$("stepName").textContent=labels[step];$("stepCount").textContent=`${step+1} / 7`;[...$("progress").children].forEach((x,i)=>x.classList.toggle("on",i<=step));$("back").disabled=step===0;$("next").textContent=step===6?"கிருத்தங்கத்தை ஆற்றில் விடுங்கள் 🌙":"அடுத்து →";$("next").disabled=false;updateSummary()}
 $("back").onclick=()=>{if(step>0){step--;show()}};
-$("next").onclick=()=>{if(step<3){step++;show();return}const img=$("krathong");img.classList.remove("float");void img.getBoundingClientRect();img.classList.add("float");$("next").disabled=true;$("summary").textContent=($("wish").value.trim()||"உங்கள் நல்ல விருப்பங்கள் நிறைவேறட்டும்.")+" — இந்த இரவு உங்களுக்கு அமைதியையும் மகிழ்ச்சியையும் கொண்டு வரட்டும்."};
-
-$("startJourney").addEventListener("click",()=>{
- $("cover").hidden=true;
- $("builder").hidden=false;
- window.scrollTo({top:0,behavior:"smooth"});
-});
-
+$("next").onclick=()=>{if(step<6){step++;show();return}const preview=$("preview"),img=$("krathong");preview.classList.remove("released");img.classList.remove("float");void img.getBoundingClientRect();preview.classList.add("released");img.classList.add("float");$("next").disabled=true;$("finalWish").textContent=($("wish").value.trim()||"உங்கள் நல்ல விருப்பங்கள் நிறைவேறட்டும்.")+" — இந்த இரவு உங்களுக்கு அமைதியையும் மகிழ்ச்சியையும் கொண்டு வரட்டும். 💛"};
+$("wish").addEventListener("input",updateSummary);
+$("startJourney").addEventListener("click",()=>{$("cover").hidden=true;$("builder").hidden=false;window.scrollTo({top:0,behavior:"smooth"})});
 render();show();
 </script></body></html>
